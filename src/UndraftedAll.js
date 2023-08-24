@@ -1,51 +1,49 @@
-import React from 'react';
-
-import Undrafted from './Undrafted'
+import React from "react";
+import Undrafted from "./Undrafted";
 
 function UndraftedAll(props) {
-  return (
-    <div className='col-md-3 col-sm-12 col-xs-12'>
-      <div className="aid-title hidden-xs">
-        <i className="fa fa-sort-amount-asc"></i> Overall Rankings
-      </div>
+	return (
+		<div>
+			<div className="aid-title hidden-xs">
+				<i className="fa fa-sort-amount-asc"></i> Overall Rankings
+			</div>
 
-      <div className="row form-group">
-        <div className="form-group col-md-4">
-          <select value={ props.format } onChange={ props.fetch } >
-            <option value="standard">Standard</option>
-            <option value="ppr">PPR</option>
-            <option value="half_ppr">0.5 PPR</option>
-          </select>
-        </div>
+			<div className="row form-group">
+				<div className="w-4/5">
+					<input
+						type="text"
+						className="form-control mr-4 w-1/2"
+						placeholder="Search"
+						onChange={props.search}
+						value={props.query}
+					/>
+				</div>
+			</div>
 
-        <div className="col-md-8">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search"
-            onChange={props.search}
-            value={ props.query }
-          />
-        </div>
-      </div>
-
-      <div className='scrollable overall-rankings'>
-        <Undrafted
-          fields={['rank', 'tier', 'position', 'name', 'team']}
-          players={props.players}
-          draft={(p) => props.draft(p)}
-        />
-      </div>
-    </div>
-  )
+			<div className="scrollable overall-rankings">
+				<Undrafted
+					fields={[
+						"RK",
+						"TIERS",
+						"POS",
+						"player",
+						"TEAM",
+						"bye",
+						"age",
+						"draft_year",
+					]}
+					players={props.players}
+					draft={(p) => props.draft(p)}
+				/>
+			</div>
+		</div>
+	);
 }
 
 UndraftedAll.propTypes = {
-  players: React.PropTypes.array.isRequired,
-  format: React.PropTypes.string.isRequired,
-  query: React.PropTypes.string.isRequired,
-  search: React.PropTypes.func.isRequired,
-  fetch: React.PropTypes.func.isRequired,
+	players: React.PropTypes.array.isRequired,
+	query: React.PropTypes.string.isRequired,
+	search: React.PropTypes.func.isRequired,
 };
 
-export default UndraftedAll
+export default UndraftedAll;

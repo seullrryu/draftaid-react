@@ -1,15 +1,14 @@
-This project is a direct port of [Fantasy Football Rankings](https://github.com/jayjzheng/ff_rankings).
+# Jay Zheng's Fantasy Draft Tool - with using fantasyPros data
 
-It uses ranking and tiering data [Boris Chen](http://www.borischen.co/) and makes an interactive draftboard to help you during your fantasy football draft.
+## Directions
 
-it was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+1. Go to https://github.com/dynastyprocess/data/blob/master/files/values-players.csv get the most recent age info
+2. Go to https://www.fantasypros.com/nfl/rankings/half-point-ppr-cheatsheets.php click the download button to download the csv
+3. Replace the files in the iPython notebook and run the notebook again
+4. Copy the JSON created and replace them in utils/players.json
+5. run `npm run start`
 
-## Commands
-- Run: `npm start`
-- Build: `npm run build`
-- Test: `npm test`
-
-## TODOs
-- Local Storage
-- Tests
-- Better CSS
+TODO: 
+- localStorage 
+- Depth Chart 
+- Schedules

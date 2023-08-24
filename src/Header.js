@@ -4,8 +4,7 @@ function Header() {
     return (
         <div className="App-header">
             <h2>
-              Draft Aid&nbsp;
-              <a href="http://www.borischen.co" target="_blank"><small>BorisChen.co</small></a>
+              Draft Aid Seulmin Ryu
             </h2>
         </div>
     );

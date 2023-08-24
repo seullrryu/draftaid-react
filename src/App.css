@@ -51,6 +51,11 @@ html, body {
   margin-bottom: 10px;
 }
 
+.positions {
+  height: 250px;
+  margin-bottom: 20px;
+}
+
 .btn-responsive {
   padding: 4px 8px;
   font-size: 90%;
