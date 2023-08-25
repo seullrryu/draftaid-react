@@ -4,7 +4,6 @@ import PlayerTable from "./PlayerTable";
 
 function Undrafted(props) {
 	let players = props.players.slice().filter((p) => !p.drafted);
-  console.log(players)
 	if (props.position) {
 		players = players.filter((p) => p.POS.includes(props.position));
 	}

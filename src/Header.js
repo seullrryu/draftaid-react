@@ -4,7 +4,7 @@ function Header() {
     return (
         <div className="App-header">
             <h2>
-              Draft Aid Seulmin Ryu
+              Draft Aid
             </h2>
         </div>
     );

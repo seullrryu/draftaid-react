@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 import UndraftedAll from "./UndraftedAll";
 import UndraftedPositions from "./UndraftedPositions";
+import Depth from "./Depth"
 import Drafted from "./Drafted";
-// import Depth from "./Depth";
 import players from "./utils/players.json";
 
 class DraftBoard extends Component {
@@ -26,12 +26,17 @@ class DraftBoard extends Component {
 
 	fetchPlayers() {
 		const self = this;
-
+    players.map((p) => {
+      if (localStorage.getItem(p.player)) {
+        p.drafted = Number(localStorage.getItem(p.player));
+      }
+    })
 		self.setState({
 			players: players,
 			filteredPlayers: players,
 			isLoading: false,
 			query: "",
+      currentDraft: Number(localStorage.getItem('currentDraft')) || 0
 		});
 	}
 
@@ -52,7 +57,16 @@ class DraftBoard extends Component {
 		if (~index) {
 			players[index].drafted = this.state.currentDraft + 1;
 		}
-
+    
+    players.forEach((p) => {
+      if (p.drafted) {
+        if (localStorage.getItem(p.player) === null) {
+          localStorage.setItem(p.player, (this.state.currentDraft + 1).toString());
+        }
+      }
+    })
+    localStorage.setItem('currentDraft', (this.state.currentDraft + 1).toString());
+    
 		this.setState({
 			currentDraft: this.state.currentDraft + 1,
 			players: players,
@@ -70,8 +84,11 @@ class DraftBoard extends Component {
 		const index = players.findIndex((p) => p.drafted === currentDraft);
 		if (~index) {
 			players[index].drafted = null;
+      localStorage.removeItem(players[index]["player"])
 		}
-
+    if (localStorage.getItem("currentDraft")) {
+      localStorage.setItem("currentDraft", this.state.currentDraft - 1);
+    }
 		this.setState({
 			currentDraft: this.state.currentDraft - 1,
 			players: players,
@@ -80,6 +97,7 @@ class DraftBoard extends Component {
 
 	reset() {
 		const players = this.state.players.slice();
+    localStorage.clear()
 		players.map((player, i) => {
 			return (player.drafted = null);
 		});
@@ -109,10 +127,9 @@ class DraftBoard extends Component {
             search={(e) => this.searchPlayers(e.target.value)}
             query={this.state.query}
           />
-          {/* <Depth players={this.state.filteredPlayers}></Depth> */}
         </div>
 
-				<UndraftedPositions players={this.state.filteredPlayers} draft={(p) => this.draft(p)} />
+				<UndraftedPositions players={this.state.players} draft={(p) => this.draft(p)} />
 
 				<Drafted
 					currentDraft={this.state.currentDraft}
